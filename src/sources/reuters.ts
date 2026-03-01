@@ -1,6 +1,9 @@
 import * as cheerio from "cheerio";
 import type { EventItem } from "../types/event";
 import { REUTERS_WORLD } from "../config/sources";
+import { getLogger } from "../logger";
+
+const log = getLogger("reuters");
 
 export async function fetchReuters(): Promise<EventItem[]> {
     const res = await fetch(REUTERS_WORLD);
@@ -20,5 +23,7 @@ export async function fetchReuters(): Promise<EventItem[]> {
         });
     });
 
-    return articles.slice(0, 10);
+    const result = articles.slice(0, 10);
+    log.debug({ count: result.length }, "Reuters fetched");
+    return result;
 }
