@@ -1,6 +1,6 @@
 import { aggregate } from "../core/aggregator";
 import { dedupe } from "../core/deduplicator";
-import { formatForAI } from "../core/formatter";
+import { formatEmail } from "../core/formatter";
 import { summarizeWithGemini } from "../ai/geminiClient";
 import { sendMail } from "../delivery/mailer";
 import { loadState, saveState } from "../storage/stateManager";
@@ -22,11 +22,13 @@ async function run() {
     }
 
     log.info({ total: events.length, fresh: fresh.length }, "Events aggregated");
-    const formatted = formatForAI(fresh);
+    const formatted = formatEmail(fresh);
 
-    const summary = await summarizeWithGemini(formatted);
+    const structured = await summarizeWithGemini(formatted);
 
-    await sendMail(summary);
+    const emailBody = formatEmail(structured);
+
+    await sendMail(emailBody);
 
     state.seen.push(...fresh.map(e => e.link));
     saveState(state);

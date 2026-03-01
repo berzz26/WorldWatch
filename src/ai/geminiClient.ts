@@ -7,10 +7,29 @@ export async function summarizeWithGemini(content: string) {
     const prompt = `
 You are a geopolitical intelligence analyst.
 
-Summarize the following global events clearly.
-Group by region.
-Highlight critical escalations.
-Be concise but informative.
+Analyze the events below and return ONLY valid JSON.
+
+Format strictly as:
+
+{
+  "summary": "2-3 sentence high level overview",
+  "regions": [
+    {
+      "name": "Region Name",
+      "critical": true/false,
+      "events": [
+        {
+          "title": "...",
+          "severity": "LOW | MEDIUM | HIGH",
+          "brief": "1-2 sentence explanation"
+        }
+      ]
+    }
+  ]
+}
+
+Mark a region as critical if it contains escalations, military conflict,
+major economic disruption, or geopolitical instability.
 
 Events:
 ${content}
