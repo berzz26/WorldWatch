@@ -33,7 +33,21 @@ export const RSS_SOURCES = [
 
   //  Conflict Monitoring
   "https://www.reddit.com/r/UkraineWarVideoReport/.rss",
-  "https://www.reddit.com/r/MiddleEastNews/.rss"
+  "https://www.reddit.com/r/MiddleEastNews/.rss",
+
+  // Markets & Finance
+  "https://feeds.reuters.com/reuters/businessNews",
+  "https://www.cnbc.com/id/20910258/device/rss/rss.html",  // CNBC Top News
+  "https://www.moneycontrol.com/rss/latestnews.xml",
+  "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms",  // ET Markets
+  "https://www.business-standard.com/rss/markets-106.rss",
 ];
 
 export const REUTERS_WORLD = "https://www.reuters.com/world/";
+
+export const MARKET_INDICES = [
+  { symbol: "^GSPC", name: "S&P 500" },
+  { symbol: "^IXIC", name: "NASDAQ" },
+  { symbol: "^NSEI", name: "Nifty 50" },
+  { symbol: "^BSESN", name: "BSE Sensex" },
+];

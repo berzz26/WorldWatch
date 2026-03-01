@@ -50,6 +50,9 @@ Always include at least one region with "name": "India" in the regions array.
 If none of the events relate to India, return an India region with an empty
 events array and a brief note such as "No major India updates today".
 
+Include a region with "name": "Markets & Finance" for financial, economic,
+stock market, and business news. If no such events exist, omit this region.
+
 For every event, always include a \"url\" field that exactly matches the source
 URL for that event (do not modify, shorten, or replace it).
 ${formatHint}

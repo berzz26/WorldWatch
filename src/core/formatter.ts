@@ -1,3 +1,5 @@
+import type { IndexQuote } from "../sources/marketsFetcher";
+
 function escapeHtml(value: string | undefined | null): string {
     if (!value) return "";
     return value
@@ -8,7 +10,7 @@ function escapeHtml(value: string | undefined | null): string {
         .replace(/'/g, "&#39;");
 }
 
-export function formatEmail(report: any) {
+export function formatEmail(report: any, indices?: IndexQuote[]) {
     const generatedAt = new Date().toLocaleString("en-IN", {
         timeZone: "Asia/Kolkata",
     });
@@ -17,25 +19,34 @@ export function formatEmail(report: any) {
     const indiaRegions = regions.filter(
         (r) => typeof r?.name === "string" && r.name.toLowerCase().includes("india")
     );
+    const marketsRegions = regions.filter(
+        (r) =>
+            typeof r?.name === "string" &&
+            (r.name.toLowerCase().includes("markets") || r.name.toLowerCase().includes("finance"))
+    );
     const otherRegions = regions.filter(
-        (r) => !indiaRegions.includes(r)
+        (r) => !indiaRegions.includes(r) && !marketsRegions.includes(r)
     );
 
-    const renderRegion = (region: any, accent: "india" | "critical" | "normal") => {
+    const renderRegion = (region: any, accent: "india" | "markets" | "critical" | "normal") => {
         const events: any[] = Array.isArray(region?.events) ? region.events : [];
 
         const borderColor =
             accent === "india"
                 ? "#ff9933"
-                : accent === "critical"
-                    ? "#e53935"
-                    : "#e0e0e0";
+                : accent === "markets"
+                    ? "#1565c0"
+                    : accent === "critical"
+                        ? "#e53935"
+                        : "#e0e0e0";
         const headerBg =
             accent === "india"
                 ? "#fff3e0"
-                : accent === "critical"
-                    ? "#ffebee"
-                    : "#f5f5f5";
+                : accent === "markets"
+                    ? "#e3f2fd"
+                    : accent === "critical"
+                        ? "#ffebee"
+                        : "#f5f5f5";
 
         const items = events
             .map((event) => {
@@ -77,7 +88,7 @@ export function formatEmail(report: any) {
       <section style="border:1px solid ${borderColor};border-radius:8px;margin:16px 0;overflow:hidden;">
         <div style="background:${headerBg};padding:10px 14px;">
           <h2 style="margin:0;font-size:16px;font-weight:600;color:#222;">
-            ${accent === "india" ? "🇮🇳 India" : escapeHtml(region?.name)}
+            ${accent === "india" ? "🇮🇳 India" : accent === "markets" ? "📈 " + escapeHtml(region?.name) : escapeHtml(region?.name)}
             ${region?.critical && accent !== "india"
                 ? '<span style="color:#e53935;font-size:12px;margin-left:6px;">(Critical)</span>'
                 : ""}
@@ -94,6 +105,10 @@ export function formatEmail(report: any) {
 
     const indiaHtml = indiaRegions
         .map((r) => renderRegion(r, "india"))
+        .join("");
+
+    const marketsHtml = marketsRegions
+        .map((r) => renderRegion(r, "markets"))
         .join("");
 
     const otherHtml = otherRegions
@@ -117,10 +132,47 @@ export function formatEmail(report: any) {
         </p>
       </div>
 
+      ${
+        indices && indices.length > 0
+          ? `
+      <div style="padding:0 24px 16px 24px;">
+        <h2 style="margin:0 0 10px 0;font-size:16px;font-weight:600;color:#222;">📈 Markets Snapshot</h2>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+          <thead>
+            <tr style="border-bottom:1px solid #eee;">
+              <th style="text-align:left;padding:8px 0;color:#666;font-weight:600;">Index</th>
+              <th style="text-align:right;padding:8px 0;color:#666;font-weight:600;">Price</th>
+              <th style="text-align:right;padding:8px 0;color:#666;font-weight:600;">Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${indices
+              .map(
+                (q) => {
+                  const isUp = q.change >= 0;
+                  const color = isUp ? "#2e7d32" : "#c62828";
+                  const sign = isUp ? "+" : "";
+                  return `
+              <tr style="border-bottom:1px solid #f0f0f0;">
+                <td style="padding:8px 0;">${escapeHtml(q.name)}</td>
+                <td style="text-align:right;padding:8px 0;">${q.price.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</td>
+                <td style="text-align:right;padding:8px 0;color:${color};font-weight:500;">${sign}${q.changePercent.toFixed(2)}%</td>
+              </tr>`;
+                }
+              )
+              .join("")}
+          </tbody>
+        </table>
+      </div>
+      `
+          : ""
+      }
+
       <div style="padding:0 24px 20px 24px;">
         ${indiaHtml ||
         '<section style="border:1px solid #ff9933;border-radius:8px;margin:16px 0;overflow:hidden;"><div style="background:#fff3e0;padding:10px 14px;"><h2 style="margin:0;font-size:16px;font-weight:600;color:#222;">🇮🇳 India</h2></div><div style="padding:12px 16px;"><p style="margin:0;font-size:13px;color:#666;">No major India updates today.</p></div></section>'
         }
+        ${marketsHtml}
         ${otherHtml}
       </div>
     </div>

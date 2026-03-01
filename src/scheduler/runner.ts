@@ -3,6 +3,7 @@ import { dedupe } from "../core/deduplicator";
 import { formatEmail } from "../core/formatter";
 import { summarizeWithGemini } from "../ai/geminiClient";
 import { sendMail } from "../delivery/mailer";
+import { fetchMarketIndices } from "../sources/marketsFetcher";
 import { loadState, saveState } from "../storage/stateManager";
 import { MAIL_INTERVAL } from "../config/setting";
 import { getLogger } from "../logger";
@@ -39,7 +40,8 @@ async function run() {
 
     const structured = await summarizeWithGemini(aiInput, eventsForAi.length);
 
-    const emailBody = formatEmail(structured);
+    const indices = await fetchMarketIndices();
+    const emailBody = formatEmail(structured, indices);
 
     await sendMail(emailBody);
 
