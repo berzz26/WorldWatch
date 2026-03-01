@@ -24,7 +24,7 @@ async function run() {
     log.info({ total: events.length, fresh: fresh.length }, "Events aggregated");
 
     // Cap events sent to Gemini when very high to avoid response truncation
-    const MAX_EVENTS_FOR_AI = 1000;
+    const MAX_EVENTS_FOR_AI = 100;
     const eventsForAi = fresh.length > MAX_EVENTS_FOR_AI ? fresh.slice(0, MAX_EVENTS_FOR_AI) : fresh;
     if (fresh.length > MAX_EVENTS_FOR_AI) {
         log.info({ capped: MAX_EVENTS_FOR_AI, original: fresh.length }, "Capped events for AI");
