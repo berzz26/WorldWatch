@@ -1,5 +1,4 @@
 
-
 # WorldWatch
 
 WorldWatch is an automated geopolitical intelligence pipeline built with Bun.
@@ -9,7 +8,24 @@ It aggregates global news from multiple RSS sources, filters new events, summari
 The system is designed to be modular, extensible, and free-tier friendly.
 
 ---
+## ScreenShots
 
+| Global Report | Markets Snapshot |
+|---------------|------------------|
+| <img src="https://github.com/user-attachments/assets/512f9946-aa55-48cb-93f5-99c3b2c357d1" width="100%"> | <img src="https://github.com/user-attachments/assets/c273e279-34f5-4bac-8693-ea3ca1aeb923" width="100%"> |
+
+| Markets & Finance | Tech & AI |
+|-------------------|-----------|
+| <img src="https://github.com/user-attachments/assets/1a7b5d67-46ec-492f-8420-ecbfd3d2af01" width="100%"> | <img src="https://github.com/user-attachments/assets/7939ab95-7a42-4c03-bd03-ff8c11719513" width="100%"> |
+
+### 🌍 Regional Focus
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/9d2d89c0-dbfd-407c-b316-eb5857bd473a" width="70%">
+</p>
+
+* Get Structured News at intervals you like!
+* Edit the  `sources/` directory and add the sources you would like to scrape news from 
 ## Architecture
 
 The pipeline follows a simple flow:
