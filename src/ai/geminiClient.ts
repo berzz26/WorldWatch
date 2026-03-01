@@ -31,6 +31,10 @@ Format strictly as:
 Mark a region as critical if it contains escalations, military conflict,
 major economic disruption, or geopolitical instability.
 
+Always include at least one region with "name": "India" in the regions array.
+If none of the events relate to India, return an India region with an empty
+events array and a brief note such as "No major India updates today".
+
 Events:
 ${content}
 `;

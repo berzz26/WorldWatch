@@ -30,7 +30,35 @@ async function run() {
 
     const emailBody = formatEmail(structured);
 
-    await sendMail(emailBody);
+    // Append HTML sources section with unique links
+    const uniqueByLink = new Map<string, typeof fresh[number]>();
+    for (const e of fresh) {
+        if (!uniqueByLink.has(e.link)) uniqueByLink.set(e.link, e);
+    }
+    const sourcesItems = Array.from(uniqueByLink.values())
+        .map(
+            e =>
+                `<li style="margin:4px 0;font-size:13px;color:#333;">
+                   <strong>${e.source}</strong>:
+                   <a href="${e.link}" style="color:#1565c0;text-decoration:none;">${e.link}</a>
+                 </li>`
+        )
+        .join("");
+
+    const sourcesSection = `
+      <div style="max-width:640px;margin:0 auto;">
+        <div style="margin-top:16px;padding:12px 16px 20px 16px;">
+          <h3 style="margin:0 0 8px 0;font-size:15px;font-weight:600;color:#222;">Sources</h3>
+          <ul style="margin:0;padding-left:18px;list-style:disc;">
+            ${sourcesItems || '<li style="font-size:13px;color:#666;">No sources available</li>'}
+          </ul>
+        </div>
+      </div>
+    `;
+
+    const emailWithSources = emailBody + sourcesSection;
+
+    await sendMail(emailWithSources);
 
     state.seen.push(...fresh.map(e => e.link));
     saveState(state);
