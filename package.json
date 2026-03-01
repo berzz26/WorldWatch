@@ -9,6 +9,10 @@
   "peerDependencies": {
     "typescript": "^5"
   },
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "start": "bun run src/index.ts"
+  },
   "dependencies": {
     "@types/nodemailer": "^7.0.11",
     "cheerio": "^1.2.0",
