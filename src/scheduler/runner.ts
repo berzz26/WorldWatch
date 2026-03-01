@@ -22,14 +22,22 @@ async function run() {
     }
 
     log.info({ total: events.length, fresh: fresh.length }, "Events aggregated");
-    const aiInput = fresh
+
+    // Cap events sent to Gemini when very high to avoid response truncation
+    const MAX_EVENTS_FOR_AI = 1000;
+    const eventsForAi = fresh.length > MAX_EVENTS_FOR_AI ? fresh.slice(0, MAX_EVENTS_FOR_AI) : fresh;
+    if (fresh.length > MAX_EVENTS_FOR_AI) {
+        log.info({ capped: MAX_EVENTS_FOR_AI, original: fresh.length }, "Capped events for AI");
+    }
+
+    const aiInput = eventsForAi
         .map(
             (e, idx) =>
                 `${idx + 1}. [${e.source}] ${e.title}\nURL: ${e.link}`
         )
         .join("\n\n");
 
-    const structured = await summarizeWithGemini(aiInput);
+    const structured = await summarizeWithGemini(aiInput, eventsForAi.length);
 
     const emailBody = formatEmail(structured);
 
