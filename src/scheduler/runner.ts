@@ -22,9 +22,11 @@ async function run() {
     }
 
     log.info({ total: events.length, fresh: fresh.length }, "Events aggregated");
-    const formatted = formatEmail(fresh);
+    const aiInput = fresh
+        .map(e => `- [${e.source}] ${e.title} (${e.link})`)
+        .join("\n");
 
-    const structured = await summarizeWithGemini(formatted);
+    const structured = await summarizeWithGemini(aiInput);
 
     const emailBody = formatEmail(structured);
 

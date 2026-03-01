@@ -59,6 +59,25 @@ ${content}
         log.error({ data }, "Gemini response missing text");
         throw new Error("Invalid Gemini response");
     }
-    log.info({ summaryLength: text.length }, "Gemini summary done");
-    return text;
+
+    const cleaned = text.replace(/```json|```/g, "").trim();
+
+    try {
+        const parsed = JSON.parse(cleaned);
+        log.info(
+            {
+                rawLength: text.length,
+                summaryLength: parsed.summary?.length ?? 0,
+                regions: Array.isArray(parsed.regions) ? parsed.regions.length : 0,
+            },
+            "Gemini summary parsed"
+        );
+        return parsed;
+    } catch (err) {
+        log.error(
+            { text, err: err instanceof Error ? err.message : String(err) },
+            "Failed to parse JSON from Gemini"
+        );
+        throw new Error("Gemini returned invalid JSON");
+    }
 }
