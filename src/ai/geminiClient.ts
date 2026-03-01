@@ -53,6 +53,9 @@ events array and a brief note such as "No major India updates today".
 Include a region with "name": "Markets & Finance" for financial, economic,
 stock market, and business news. If no such events exist, omit this region.
 
+Include a region with "name": "Tech & AI" for software, tech companies, AI,
+ML, startups, and tech industry news. If no such events exist, omit this region.
+
 For every event, always include a \"url\" field that exactly matches the source
 URL for that event (do not modify, shorten, or replace it).
 ${formatHint}

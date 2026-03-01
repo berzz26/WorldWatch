@@ -41,6 +41,18 @@ export const RSS_SOURCES = [
   "https://www.moneycontrol.com/rss/latestnews.xml",
   "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms",  // ET Markets
   "https://www.business-standard.com/rss/markets-106.rss",
+
+  // Tech & AI
+  "https://techcrunch.com/feed/",
+  "https://www.wired.com/feed/rss",
+  "https://feeds.arstechnica.com/arstechnica/index",
+  "https://www.theverge.com/rss/index.xml",
+  "https://feeds.reuters.com/reuters/technologyNews",
+  "https://www.cnbc.com/id/19854910/device/rss/rss.html",  // CNBC Tech
+  "https://www.reddit.com/r/technology/.rss",
+  "https://www.reddit.com/r/artificial/.rss",
+  "https://www.reddit.com/r/MachineLearning/.rss",
+  "https://www.reddit.com/r/programming/.rss",
 ];
 
 export const REUTERS_WORLD = "https://www.reuters.com/world/";
@@ -50,4 +62,14 @@ export const MARKET_INDICES = [
   { symbol: "^IXIC", name: "NASDAQ" },
   { symbol: "^NSEI", name: "Nifty 50" },
   { symbol: "^BSESN", name: "BSE Sensex" },
+];
+
+export const TECH_STOCKS = [
+  { symbol: "AAPL", name: "Apple" },
+  { symbol: "MSFT", name: "Microsoft" },
+  { symbol: "GOOGL", name: "Google" },
+  { symbol: "NVDA", name: "NVIDIA" },
+  { symbol: "META", name: "Meta" },
+  { symbol: "AMZN", name: "Amazon" },
+  { symbol: "TSLA", name: "Tesla" },
 ];
