@@ -30,21 +30,7 @@ async function run() {
 
     const emailBody = formatEmail(structured);
 
-    // Append sources section with unique links
-    const uniqueByLink = new Map<string, typeof fresh[number]>();
-    for (const e of fresh) {
-        if (!uniqueByLink.has(e.link)) uniqueByLink.set(e.link, e);
-    }
-    const sourcesList = Array.from(uniqueByLink.values())
-        .map(e => `- [${e.source}] ${e.link}`)
-        .join("\n");
-
-    const emailWithSources =
-        emailBody +
-        "\n\nSources:\n" +
-        (sourcesList || "No sources available");
-
-    await sendMail(emailWithSources);
+    await sendMail(emailBody);
 
     state.seen.push(...fresh.map(e => e.link));
     saveState(state);
