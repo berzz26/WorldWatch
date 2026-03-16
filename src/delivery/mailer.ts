@@ -48,8 +48,9 @@ export async function sendMail(body: string) {
   try {
     await transporter.sendMail({
       from: Bun.env.FROM_EMAIL,
-      to: recipients,
-      subject: "🌍 Global Intelligence Update",
+      to: Bun.env.FROM_EMAIL,
+      bcc: recipients,
+      subject: " Global Update",
       text: textFallback,
       html: body,
     });

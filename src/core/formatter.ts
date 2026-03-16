@@ -133,7 +133,7 @@ export function formatEmail(report: any, indices?: IndexQuote[]) {
   <div style="background:#f4f4f7;padding:16px 0;">
     <div style="max-width:640px;margin:0 auto;background:#ffffff;border-radius:10px;border:1px solid #e0e0e0;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;">
       <div style="padding:20px 24px 12px 24px;border-bottom:1px solid #eee;">
-        <h1 style="margin:0;font-size:22px;font-weight:700;color:#111;"> Global Intelligence Report</h1>
+        <h1 style="margin:0;font-size:22px;font-weight:700;color:#111;"> Global Report</h1>
         <p style="margin:4px 0 0 0;font-size:12px;color:#666;">Generated at ${escapeHtml(
           generatedAt
         )}</p>
