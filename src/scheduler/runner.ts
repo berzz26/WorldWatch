@@ -7,6 +7,7 @@ import { fetchMarketIndices } from "../sources/marketsFetcher";
 import { loadState, saveState } from "../storage/stateManager";
 import { MAIL_INTERVAL } from "../config/setting";
 import { getLogger } from "../logger";
+import axios from "axios";
 
 const log = getLogger("runner");
 
@@ -45,8 +46,27 @@ async function run() {
 
 
     //replace with internal route to send
-    
-    await sendMail(emailBody);
+
+    const textFallback = emailBody
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    try {
+        const res = await axios.post("http://localhost:3000/api/v1/internal/mailer", {
+            to: "aumtamboli15@gmail.com",
+            subject: " Global Update",
+            from: "WorldWatch<notifications@computebay.online>",
+            html: textFallback
+        });
+
+        log.info({ status: res.status }, "Mail API called successfully");
+    } catch (err: any) {
+        log.error(
+            { err: err?.response?.data || err.message },
+            "Mail API call failed"
+        );
+    }
+    // await sendMail(emailBody);
 
     state.seen.push(...fresh.map(e => e.link));
     saveState(state);
