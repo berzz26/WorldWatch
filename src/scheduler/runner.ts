@@ -51,22 +51,23 @@ async function run() {
         .replace(/<[^>]+>/g, " ")
         .replace(/\s+/g, " ")
         .trim();
-    try {
-        const res = await axios.post("http://localhost:3000/api/v1/internal/mailer", {
-            to: "aumtamboli15@gmail.com",
-            subject: " Global Update",
-            from: "WorldWatch<notifications@computebay.online>",
-            html: textFallback
-        });
 
-        log.info({ status: res.status }, "Mail API called successfully");
-    } catch (err: any) {
-        log.error(
-            { err: err?.response?.data || err.message },
-            "Mail API call failed"
-        );
-    }
-    // await sendMail(emailBody);
+    const MAILER_URL = Bun.env.MAILER_URL!;
+    const INTERNAL_TOKEN = Bun.env.INTERNAL_TOKEN!;
+    const res = await axios.post(
+        `${MAILER_URL}/api/v1/internal/mailer`,
+        {
+            to: "aumtamboli15@gmail.com",
+            subject: "Global Update",
+            text: textFallback,
+            html: emailBody,
+        },
+        {
+            headers: {
+                "x-internal-token": INTERNAL_TOKEN,
+            },
+        }
+    );  // await sendMail(emailBody);
 
     state.seen.push(...fresh.map(e => e.link));
     saveState(state);
