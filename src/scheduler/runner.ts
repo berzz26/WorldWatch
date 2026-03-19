@@ -43,6 +43,9 @@ async function run() {
     const indices = await fetchMarketIndices();
     const emailBody = formatEmail(structured, indices);
 
+
+    //replace with internal route to send
+    
     await sendMail(emailBody);
 
     state.seen.push(...fresh.map(e => e.link));
