@@ -86,7 +86,6 @@ async function run() {
 }
 
 export function start() {
-    run().catch(err => log.error({ err: err instanceof Error ? err.message : String(err) }, "Run failed"));
     cron.schedule(CRON_SCHEDULE, () => {
         run().catch(err => log.error({ err: err instanceof Error ? err.message : String(err) }, "Run failed"));
     });
