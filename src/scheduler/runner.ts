@@ -5,9 +5,10 @@ import { summarizeWithGemini } from "../ai/geminiClient";
 import { sendMail } from "../delivery/mailer";
 import { fetchMarketIndices } from "../sources/marketsFetcher";
 import { loadState, saveState } from "../storage/stateManager";
-import { MAIL_INTERVAL } from "../config/setting";
+import { CRON_SCHEDULE } from "../config/setting";
 import { getLogger } from "../logger";
 import axios from "axios";
+import cron from "node-cron";
 
 const log = getLogger("runner");
 
@@ -86,6 +87,8 @@ async function run() {
 
 export function start() {
     run().catch(err => log.error({ err: err instanceof Error ? err.message : String(err) }, "Run failed"));
-    setInterval(() => run().catch(err => log.error({ err: err instanceof Error ? err.message : String(err) }, "Run failed")), MAIL_INTERVAL);
-    log.info({ intervalMs: MAIL_INTERVAL }, "Scheduler started");
+    cron.schedule(CRON_SCHEDULE, () => {
+        run().catch(err => log.error({ err: err instanceof Error ? err.message : String(err) }, "Run failed"));
+    });
+    log.info({ schedule: CRON_SCHEDULE }, "Cron scheduler started");
 }
