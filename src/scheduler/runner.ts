@@ -54,18 +54,30 @@ async function run() {
 
     const MAILER_URL = Bun.env.MAILER_URL!;
     const INTERNAL_TOKEN = Bun.env.INTERNAL_TOKEN!;
-    const res = await axios.post(
-        `${MAILER_URL}/api/v1/internal/mailer`,
-        {
-            text: textFallback,
-            html: emailBody,
-        },
-        {
-            headers: {
-                "x-internal-token": INTERNAL_TOKEN,
+    let res;
+    try {
+        res = await axios.post(
+            `${MAILER_URL}/api/v1/internal/mailer`,
+            {
+                text: textFallback,
+                html: emailBody,
             },
+            {
+                headers: {
+                    "x-internal-token": INTERNAL_TOKEN,
+                },
+            }
+        );  // await sendMail(emailBody);
+    } catch (err) {
+        if (axios.isAxiosError(err)) {
+            log.error({ 
+                status: err.response?.status, 
+                errorData: err.response?.data,
+                message: err.message
+            }, "Mailer API returned an error");
         }
-    );  // await sendMail(emailBody);
+        throw err;
+    }
 
     state.seen.push(...fresh.map(e => e.link));
     saveState(state);
