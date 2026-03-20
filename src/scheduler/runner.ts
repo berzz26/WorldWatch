@@ -57,8 +57,6 @@ async function run() {
     const res = await axios.post(
         `${MAILER_URL}/api/v1/internal/mailer`,
         {
-            to: "aumtamboli15@gmail.com",
-            subject: "Global Update",
             text: textFallback,
             html: emailBody,
         },
