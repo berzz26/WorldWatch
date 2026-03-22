@@ -9,10 +9,11 @@ import { CRON_SCHEDULE } from "../config/setting";
 import { getLogger } from "../logger";
 import axios from "axios";
 import cron from "node-cron";
+import * as fs from "fs";
 
 const log = getLogger("runner");
 
-async function run() {
+export async function run() {
     log.info("Run started");
     const state = loadState();
 
@@ -27,23 +28,29 @@ async function run() {
     log.info({ total: events.length, fresh: fresh.length }, "Events aggregated");
 
     // Cap events sent to Gemini when very high to avoid response truncation
-    const MAX_EVENTS_FOR_AI = 100;
+    const MAX_EVENTS_FOR_AI = 2000;
     const eventsForAi = fresh.length > MAX_EVENTS_FOR_AI ? fresh.slice(0, MAX_EVENTS_FOR_AI) : fresh;
     if (fresh.length > MAX_EVENTS_FOR_AI) {
         log.info({ capped: MAX_EVENTS_FOR_AI, original: fresh.length }, "Capped events for AI");
     }
 
-    const aiInput = eventsForAi
+    const structured = await summarizeWithGemini(eventsForAi);
+
+    // Write down the raw response from gemini
+    fs.writeFileSync("2gemini_raw_response.txt", JSON.stringify(structured, null, 2));
+
+    // No capped basically the events to a txt file
+    const allEventsText = fresh
         .map(
             (e, idx) =>
                 `${idx + 1}. [${e.source}] ${e.title}\nURL: ${e.link}`
         )
         .join("\n\n");
-
-    const structured = await summarizeWithGemini(aiInput, eventsForAi.length);
+    fs.writeFileSync("2uncapped_events.txt", allEventsText);
 
     const indices = await fetchMarketIndices();
     const emailBody = formatEmail(structured, indices);
+
 
 
     //replace with internal route to send
@@ -71,8 +78,8 @@ async function run() {
         );  // await sendMail(emailBody);
     } catch (err) {
         if (axios.isAxiosError(err)) {
-            log.error({ 
-                status: err.response?.status, 
+            log.error({
+                status: err.response?.status,
                 errorData: err.response?.data,
                 message: err.message
             }, "Mailer API returned an error");
@@ -85,9 +92,4 @@ async function run() {
     log.info("Run completed");
 }
 
-export function start() {
-    cron.schedule(CRON_SCHEDULE, () => {
-        run().catch(err => log.error({ err: err instanceof Error ? err.message : String(err) }, "Run failed"));
-    });
-    log.info({ schedule: CRON_SCHEDULE }, "Cron scheduler started");
-}
+run() 

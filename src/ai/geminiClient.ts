@@ -1,11 +1,92 @@
 import { GEMINI_MODEL, GEMINI_URL } from "../config/gemini";
 import { getLogger } from "../logger";
+import * as fs from "fs";
 
 const log = getLogger("gemini");
 
-const HIGH_EVENT_THRESHOLD = 50;
+const HIGH_EVENT_THRESHOLD = 2000;
 
-export async function summarizeWithGemini(content: string, eventCount: number) {
+export async function summarizeWithGemini(events: any[]) {
+    const CHUNK_SIZE = 100;
+    const allResults: any[] = [];
+
+    // Process chunks sequentially
+    for (let i = 0; i < events.length; i += CHUNK_SIZE) {
+        const chunk = events.slice(i, i + CHUNK_SIZE);
+        log.info({ chunkIndex: Math.floor(i / CHUNK_SIZE) + 1, totalChunks: Math.ceil(events.length / CHUNK_SIZE), size: chunk.length }, "Processing Gemini chunk");
+
+        const aiInput = chunk
+            .map((e, idx) => `${i + idx + 1}. [${e.source}] ${e.title}\nURL: ${e.link}`)
+            .join("\n\n");
+
+        let chunkParsed = null;
+        let retries = 3;
+
+        while (retries > 0) {
+            try {
+               chunkParsed = await processGeminiChunk(aiInput, chunk.length);
+               break; // Success
+            } catch (err: any) {
+               if (err.message && err.message.includes("429")) {
+                   log.warn("Rate limited by Gemini (429). Waiting 35 seconds before retrying...");
+                   await new Promise(resolve => setTimeout(resolve, 35000));
+                   retries--;
+               } else {
+                   throw err;
+               }
+            }
+        }
+
+        if (chunkParsed) {
+            allResults.push(chunkParsed);
+            // Save progress of each chunk to avoid losing data on unrecoverable crash
+            fs.writeFileSync("partial_gemini_chunks.json", JSON.stringify(allResults, null, 2));
+        } else {
+            throw new Error(`Failed to process chunk ${Math.floor(i / CHUNK_SIZE) + 1} after retries`);
+        }
+        
+        // Delay between chunks to avoid hitting 15 Requests Per Minute or 1M Tokens/Min limits
+        if (i + CHUNK_SIZE < events.length) {
+            log.info("Waiting 10 seconds before next chunk...");
+            await new Promise(resolve => setTimeout(resolve, 10000));
+        }
+    }
+
+    return mergeGeminiResults(allResults);
+}
+
+function mergeGeminiResults(results: any[]) {
+    if (results.length === 0) return { summary: "No summary generated.", regions: [] };
+
+    const mergedSummary = results.map(r => r.summary).filter(Boolean).join("\n\n");
+    const mergedRegionsMap = new Map<string, any>();
+
+    for (const res of results) {
+        if (!Array.isArray(res.regions)) continue;
+        for (const region of res.regions) {
+            if (!region.name) continue;
+            
+            const existing = mergedRegionsMap.get(region.name);
+            if (existing) {
+                existing.events.push(...(region.events || []));
+                existing.critical = existing.critical || region.critical;
+            } else {
+                mergedRegionsMap.set(region.name, {
+                    name: region.name,
+                    critical: region.critical,
+                    events: region.events ? [...region.events] : []
+                });
+            }
+        }
+    }
+
+    return {
+        summary: mergedSummary,
+        regions: Array.from(mergedRegionsMap.values())
+    };
+}
+
+async function processGeminiChunk(content: string, eventCount: number) {
     const isHighVolume = eventCount > HIGH_EVENT_THRESHOLD;
 
     const formatHint = isHighVolume
@@ -73,10 +154,11 @@ ${content}
             body: JSON.stringify({
                 contents: [{ parts: [{ text: prompt }] }],
                 generationConfig: {
-                    maxOutputTokens: 16384,
+                    maxOutputTokens: 150000,
                     temperature: 0.3
                 }
-            })
+            }),
+            signal: AbortSignal.timeout(600000)
         }
     );
 
@@ -132,7 +214,8 @@ ${content}
                     maxOutputTokens: 16384,
                     temperature: 0.3
                 }
-            })
+            }),
+            signal: AbortSignal.timeout(600000)
         }
     );
     const retryData: any = await retryResponse.json();

@@ -1,0 +1,257 @@
+{
+  "summary": "Escalating tensions between the US and Iran dominate headlines, with threats of military action and retaliatory strikes. Global markets react to the geopolitical instability, while tech news focuses on AI advancements and related legal challenges.",
+  "regions": [
+    {
+      "name": "Middle East",
+      "critical": true,
+      "events": [
+        {
+          "title": "Trump threatens to obliterate Iran power plants unless Hormuz Strait open",
+          "severity": "HIGH",
+          "brief": "Trump threatens to attack Iran power plants if Strait of Hormuz not reopened.",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/3/22/trump-threatens-to-obliterate-iran-power-plants-unless-hormuz-strait-open?traffic_source=rss"
+        },
+        {
+          "title": "Iran war live: Trump threatens to attack power plants over Strait of Hormuz",
+          "severity": "HIGH",
+          "brief": "Iran war live: Trump threatens attacks on power plants over Hormuz Strait.",
+          "url": "https://www.aljazeera.com/news/liveblog/2026/3/22/iran-war-live-trump-threatens-attacks-on-power-plants-over-hormuz-strait?traffic_source=rss"
+        },
+        {
+          "title": "Iran strikes towns near Israel’s nuclear site, wounds over 100",
+          "severity": "HIGH",
+          "brief": "Iran strikes near Israeli nuclear site, wounding over 100.",
+          "url": "https://www.aljazeera.com/news/2026/3/21/iran-strikes-towns-near-israels-nuclear-site-in-escalating-tit-for-tat?traffic_source=rss"
+        },
+        {
+          "title": "State of emergency declared as Iranian missile hits Arad in southern Israel",
+          "severity": "HIGH",
+          "brief": "State of emergency declared after Iranian missile hits Arad, Israel.",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/3/21/state-of-emergency-declared-as-iranian-missile-hits-arad-in-southern-israel?traffic_source=rss"
+        },
+        {
+          "title": "US says it has crippled Iranian threat in Strait of Hormuz",
+          "severity": "MEDIUM",
+          "brief": "US claims to have crippled Iranian threat in Strait of Hormuz.",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/3/21/us-says-it-has-crippled-iranian-threat-in-strait-of-hormuz?traffic_source=rss"
+        },
+        {
+          "title": "Saudi Arabia expels Iran military attache, four embassy staff",
+          "severity": "MEDIUM",
+          "brief": "Saudi Arabia expels Iranian military attache and embassy staff.",
+          "url": "https://www.aljazeera.com/news/2026/3/21/saudi-arabia-expels-iran-military-attache-and-four-team-members?traffic_source=rss"
+        },
+        {
+          "title": "Bahrain says Patriot system intercepted drone over homes",
+          "severity": "MEDIUM",
+          "brief": "Bahrain intercepts drone with Patriot system over homes.",
+          "url": "https://www.aljazeera.com/news/2026/3/21/bahrain-says-patriot-system-intercepted-drone-over-homes?traffic_source=rss"
+        },
+        {
+          "title": "UK says Iran missile attack on Diego Garcia failed",
+          "severity": "MEDIUM",
+          "brief": "UK reports Iran missile attack on Diego Garcia failed.",
+          "url": "https://www.aljazeera.com/video/newsfeed/2026/3/21/uk-says-iran-missile-attack-on-diego-garcia-failed?traffic_source=rss"
+        },
+        {
+          "title": "Netanyahu says Iran is being 'decimated' but revolution requires 'ground component'",
+          "severity": "MEDIUM",
+          "brief": "Netanyahu states Iran is 'decimated' but needs 'ground component'.",
+          "url": "https://www.aljazeera.com/news/2026/3/19/netanyahu-trump-us-israel-iran-ground-component?traffic_source=rss"
+        },
+        {
+          "title": "Casualties as Israeli settlers set fire to homes and cars in West Bank",
+          "severity": "MEDIUM",
+          "brief": "Israeli settlers set fire to homes and cars in West Bank.",
+          "url": "https://www.aljazeera.com/news/2026/3/22/casualties-as-israeli-settlers-set-fire-to-homes-and-cars-in-west-bank?traffic_source=rss"
+        }
+      ]
+    },
+    {
+      "name": "Europe",
+      "critical": true,
+      "events": [
+        {
+          "title": "Government bonds face ‘perfect storm’ as Iran war rattles Europe's central banks",
+          "severity": "HIGH",
+          "brief": "Iran war rattles Europe's central banks, impacting government bonds.",
+          "url": "https://www.cnbc.com/2026/03/19/interest-rates-bonds-bank-of-england-european-central-bank-investors-iran-war-ecb-inflation.html"
+        },
+        {
+          "title": "UK government borrowing costs hit their highest level since 2008",
+          "severity": "HIGH",
+          "brief": "UK borrowing costs reach highest level since 2008.",
+          "url": "https://www.cnbc.com/2026/03/20/uk-gilt-market-interest-rates-boe-inflation-reeves.html"
+        },
+        {
+          "title": "Banks eye three ECB rate hikes this year",
+          "severity": "MEDIUM",
+          "brief": "Banks anticipate three ECB rate hikes this year.",
+          "url": "https://www.cnbc.com/2026/03/20/banks-eye-three-ecb-rate-hikes-this-year.html"
+        },
+        {
+          "title": "EU urges members to start storing winter gas as Iran war causes price surge",
+          "severity": "MEDIUM",
+          "brief": "EU urges gas storage due to Iran war price surge.",
+          "url": "https://www.aljazeera.com/news/2026/3/21/eu-urges-members-to-start-storing-winter-gas-as-iran-war-causes-price-surge?traffic_source=rss"
+        },
+        {
+          "title": "Ukraine-Hungary oil pipeline row threatens EU loan",
+          "severity": "MEDIUM",
+          "brief": "Ukraine-Hungary oil pipeline dispute jeopardizes EU loan.",
+          "url": "https://www.bbc.com/news/articles/cr71rkeg7xxo?at_medium=RSS&at_campaign=rss"
+        }
+      ]
+    },
+    {
+      "name": "Americas",
+      "critical": true,
+      "events": [
+        {
+          "title": "Trump says U.S. will attack Iran power plants if Tehran doesn't reopen Strait of Hormuz in 48 hours",
+          "severity": "HIGH",
+          "brief": "Trump threatens Iran power plants over Strait of Hormuz.",
+          "url": "https://www.cnbc.com/2026/03/21/iran-targeted-but-did-not-hit-diego-garcia-base-with-missiles-wsj.html"
+        },
+        {
+          "title": "National blackout hits Cuba for second time in a week",
+          "severity": "HIGH",
+          "brief": "Cuba experiences national blackout for second time weekly.",
+          "url": "https://www.bbc.com/news/articles/cvg0l44yxrvo?at_medium=RSS&at_campaign=rss"
+        },
+        {
+          "title": "U.S. says Cuba is prohibited from taking Russian oil",
+          "severity": "MEDIUM",
+          "brief": "US prohibits Cuba from receiving Russian oil.",
+          "url": "https://www.cnbc.com/2026/03/20/cuba-crisis-fuel-tankers-russia-oil-gas-energy-us-trump.html"
+        },
+        {
+          "title": "Trump threatens to send ICE to airports unless funding deal reached",
+          "severity": "MEDIUM",
+          "brief": "Trump threatens ICE deployment to airports over funding.",
+          "url": "https://www.bbc.com/news/articles/c3ex9nq2qywo?at_medium=RSS&at_campaign=rss"
+        },
+        {
+          "title": "Flash flooding swamps Hawaii, prompting evacuation orders for 5,500 people",
+          "severity": "MEDIUM",
+          "brief": "Hawaii faces flash flooding, 5,500 evacuated.",
+          "url": "https://www.aljazeera.com/news/2026/3/21/flash-flooding-swamps-hawaii-prompting-evacuation-orders-for-5500-people?traffic_source=rss"
+        },
+        {
+          "title": "Trump invokes emergency powers with $23 billion in Gulf arms sales",
+          "severity": "MEDIUM",
+          "brief": "Trump invokes emergency powers for Gulf arms sales.",
+          "url": "https://www.cnbc.com/2026/03/20/us-arms-weapon-sales-middle-east-iran-israel-war.html"
+        },
+        {
+          "title": "Trump compares attack on Iran to Pearl Harbor in meeting with Japanese PM",
+          "severity": "LOW",
+          "brief": "Trump compares Iran attack to Pearl Harbor.",
+          "url": "https://www.bbc.com/news/videos/cx248jvgwj8o?at_medium=RSS&at_campaign=rss"
+        }
+      ]
+    },
+    {
+      "name": "India",
+      "critical": false,
+      "events": [
+        {
+          "title": "Inside India newsletter: Gold loans are thriving in India — and attracting global investors",
+          "severity": "LOW",
+          "brief": "Gold loans thrive in India, attracting global investors.",
+          "url": "https://www.cnbc.com/2026/03/19/gold-loan-demand-rises-india.html"
+        }
+      ]
+    },
+    {
+      "name": "Markets & Finance",
+      "critical": true,
+      "events": [
+        {
+          "title": "Gold drops nearly 10% in worst weekly rout since 2011",
+          "severity": "HIGH",
+          "brief": "Gold drops nearly 10% in worst weekly rout since 2011.",
+          "url": "https://www.cnbc.com/2026/03/20/gold-silver-price-metal-market-oil-brent-wti-futures-iran-war-inflation.html"
+        },
+        {
+          "title": "Treasury yields climb as bonds sell off and fear grows that Fed rate cuts are off the table",
+          "severity": "HIGH",
+          "brief": "Treasury yields climb; Fed rate cuts uncertain.",
+          "url": "https://www.cnbc.com/2026/03/20/us-treasury-yields-edge-higher-as-iran-war-drives-inflation-pressure.html"
+        },
+        {
+          "title": "The Iran war is sending shockwaves through the world's busiest IPO market",
+          "severity": "HIGH",
+          "brief": "Iran war disrupts world's busiest IPO market.",
+          "url": "https://www.cnbc.com/2026/03/20/iran-war-dampen-most-active-ipo-market.html"
+        },
+        {
+          "title": "Copper joins gold in broad commodities sell-off. There's a worrying reason behind it",
+          "severity": "MEDIUM",
+          "brief": "Copper and gold in broad commodities sell-off.",
+          "url": "https://www.cnbc.com/2026/03/19/copper-joins-gold-in-broad-commodities-sell-off-theres-a-worrying-reason-behind-it.html"
+        },
+        {
+          "title": "Stocks shake off Tuesday's oil rise — plus, Amazon debuts even faster delivery",
+          "severity": "MEDIUM",
+          "brief": "Stocks ignore oil rise; Amazon offers faster delivery.",
+          "url": "https://www.cnbc.com/2026/03/17/stocks-shake-off-tuesdays-oil-rise-plus-amazon-offers-even-faster-delivery.html"
+        }
+      ]
+    },
+    {
+      "name": "Tech & AI",
+      "critical": true,
+      "events": [
+        {
+          "title": "Elon Musk misled Twitter investors ahead of $44 billion acquisition, jury says",
+          "severity": "HIGH",
+          "brief": "Jury finds Elon Musk misled Twitter investors.",
+          "url": "https://www.cnbc.com/2026/03/20/elon-musk-determined-to-be-liable-for-misleading-twitter-investors.html"
+        },
+        {
+          "title": "Super Micro shares tank 33% after employees charged with smuggling Nvidia chips to China",
+          "severity": "HIGH",
+          "brief": "Super Micro shares drop 33% on smuggling charges.",
+          "url": "https://www.cnbc.com/2026/03/19/us-tech-execs-smuggled-nvidia-chips-to-china-prosecutors-say.html"
+        },
+        {
+          "title": "The Tech Download: Agentic tools and chips take center stage at Nvidia's 'Super Bowl of AI'",
+          "severity": "MEDIUM",
+          "brief": "Nvidia's AI event highlights agentic tools and chips.",
+          "url": "https://www.cnbc.com/2026/03/20/nvidia-gtc-2026-agentic-ai-chips-tech-download.html"
+        },
+        {
+          "title": "Trump administration unveils national AI policy framework",
+          "severity": "MEDIUM",
+          "brief": "Trump administration releases national AI policy framework.",
+          "url": "https://www.cnbc.com/2026/03/20/trump-ai-policy-framework.html"
+        },
+        {
+          "title": "OpenAI's first crack at online shopping stumbled. It's preparing for the next wave",
+          "severity": "MEDIUM",
+          "brief": "OpenAI's online shopping attempt faltered; preparing next.",
+          "url": "https://www.cnbc.com/2026/03/20/open-ai-agentic-shopping-etsy-shopify-walmart-amazon.html"
+        },
+        {
+          "title": "Alibaba workforce shrinks 34% in 2025 as Chinese tech giant doubles down on AI",
+          "severity": "MEDIUM",
+          "brief": "Alibaba cuts workforce 34% to focus on AI.",
+          "url": "https://www.cnbc.com/2026/03/20/alibaba-headcount-falls-ai-push-sun-art-intime-sales.html"
+        },
+        {
+          "title": "How the red-hot AI data center boom is igniting demand for a new, lucrative career path: Trade workers",
+          "severity": "LOW",
+          "brief": "AI data center boom creates demand for trade workers.",
+          "url": "https://www.cnbc.com/2026/03/18/ai-data-center-buildout-jobs-salary-skilled-traders-worker-shortage.html"
+        },
+        {
+          "title": "AI videos of sexualised black women removed from TikTok after BBC investigation",
+          "severity": "LOW",
+          "brief": "TikTok removes AI videos of sexualized black women.",
+          "url": "https://www.bbc.com/news/articles/c070e283k8vo?at_medium=RSS&at_campaign=rss"
+        }
+      ]
+    }
+  ]
+}
